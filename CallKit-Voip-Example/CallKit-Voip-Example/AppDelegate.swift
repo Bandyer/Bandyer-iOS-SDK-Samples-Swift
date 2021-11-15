@@ -9,9 +9,26 @@ import CallKit
 import Bandyer
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CallClientObserver {
 
     var window: UIWindow?
+    private var url: URL?
+
+    // MARK: UISceneSession Lifecycle
+
+    @available(iOS 13.0, *)
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+
+    @available(iOS 13.0, *)
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //Before we can get started, you must review your project configuration, and enable the required
@@ -105,28 +122,39 @@ extension AppDelegate {
         //When System call ui is shown to the user, it will show a "video" button if the call supports it.
         //The code below will handle the siri intent received from the system and it will hand it to the call view controller
         //if the controller is presented
-
-        if #available(iOS 13.0, *) {
-            guard let callIntent = userActivity.interaction?.intent as? INStartCallIntent else {
-                return false
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            guard let url = userActivity.webpageURL else { return false }
+            self.url = url
+            if BandyerSDK.instance().callClient.isRunning() {
+                let intent = JoinURLIntent(url: url)
+                CallWindow.instance?.presentCallViewController(for: intent, completion: { [weak self] _ in
+                    self?.url = nil
+                })
             }
-            guard let callController = visibleController(window?.rootViewController) as? CallViewController else {
-                return false
-            }
-
-            callController.handle(startCallIntent: callIntent)
             return true
-        } else {
-            if #available(iOS 10.0, *) {
-                guard let videoCallIntent = userActivity.interaction?.intent as? INStartVideoCallIntent else {
+        }else {
+            if #available(iOS 13.0, *) {
+                guard let callIntent = userActivity.interaction?.intent as? INStartCallIntent else {
                     return false
                 }
                 guard let callController = visibleController(window?.rootViewController) as? CallViewController else {
                     return false
                 }
 
-                callController.handle(startVideoCallIntent: videoCallIntent)
+                callController.handle(startCallIntent: callIntent)
                 return true
+            } else {
+                if #available(iOS 10.0, *) {
+                    guard let videoCallIntent = userActivity.interaction?.intent as? INStartVideoCallIntent else {
+                        return false
+                    }
+                    guard let callController = visibleController(window?.rootViewController) as? CallViewController else {
+                        return false
+                    }
+
+                    callController.handle(startVideoCallIntent: videoCallIntent)
+                    return true
+                }
             }
         }
 
@@ -147,5 +175,22 @@ extension AppDelegate {
         }
 
         return visibleVC
+    }
+
+    func callClientDidStart(_ client: CallClient) {
+        guard let url = self.url else { return }
+
+        let intent = JoinURLIntent(url: url)
+
+        if let window = CallWindow.instance {
+            window.presentCallViewController(for: intent, completion: { [weak self] _ in
+                self?.url = nil
+            })
+        } else {
+            let window = CallWindow()
+            window.presentCallViewController(for: intent, completion: { [weak self] _ in
+                self?.url = nil
+            })
+        }
     }
 }

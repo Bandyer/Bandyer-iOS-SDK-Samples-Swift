@@ -36,7 +36,18 @@ class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userBarButtonItem.title = UserSession.currentUser
+        tableView = UITableView(frame: .zero, style: .plain)
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+//        userBarButtonItem.title = UserSession.currentUser
         disableMultipleSelection(false)
 
         //When view loads we register as a client observer, in order to receive notifications about incoming calls received and client state changes.

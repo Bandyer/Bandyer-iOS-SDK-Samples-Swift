@@ -36,6 +36,7 @@ class LoginViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.refreshControl?.addTarget(self, action: #selector(refreshControlDidRefresh), for: .valueChanged)
     }
 
@@ -151,7 +152,10 @@ extension LoginViewController: CallClientObserver {
 
         UserSession.currentUser = selectedUserId
 
-        performSegue(withIdentifier: segueIdentifier, sender: self)
+        let contacts = ContactsViewController()
+        let contactsNav = ContactsNavigationController(rootViewController: contacts)
+        present(contactsNav, animated: true, completion: nil)
+//        performSegue(withIdentifier: segueIdentifier, sender: self)
         hideActivityIndicatorFromNavigationBar()
         view.isUserInteractionEnabled = true
     }

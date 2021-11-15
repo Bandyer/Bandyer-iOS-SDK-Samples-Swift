@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		32DC9EAF604C76C6845E8463 /* ContactsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DC9E4F96E5416BC7F4345E /* ContactsNavigationController.swift */; };
 		670F9E436ECD4728C2CB6413 /* Pods_CallKit_Voip_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9623817767E677256F468091 /* Pods_CallKit_Voip_Example.framework */; };
+		A9390E8C2742B34C00D677E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9390E8B2742B34C00D677E6 /* SceneDelegate.swift */; };
 		A9B7246E22255FAB00D421D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7246D22255FAB00D421D1 /* AppDelegate.swift */; };
 		A9B7247322255FAB00D421D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B7247122255FAB00D421D1 /* Main.storyboard */; };
 		A9B7247522255FAC00D421D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B7247422255FAC00D421D1 /* Assets.xcassets */; };
@@ -234,6 +235,7 @@
 		3DA579B5A6A8A0D7EC5CC2D3 /* Pods-CallKit-Voip-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallKit-Voip-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CallKit-Voip-Example/Pods-CallKit-Voip-Example.release.xcconfig"; sourceTree = "<group>"; };
 		9623817767E677256F468091 /* Pods_CallKit_Voip_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CallKit_Voip_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C11C223478E6500AA97B7 /* CallKit-Voip-Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CallKit-Voip-Example.entitlements"; sourceTree = "<group>"; };
+		A9390E8B2742B34C00D677E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A9B7246A22255FAB00D421D1 /* CallKit-Voip-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CallKit-Voip-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B7246D22255FAB00D421D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9B7247222255FAB00D421D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 				A9B7263C2225905B00D421D1 /* Resources */,
 				A9B726372225905B00D421D1 /* Services */,
 				A9B7246D22255FAB00D421D1 /* AppDelegate.swift */,
+				A9390E8B2742B34C00D677E6 /* SceneDelegate.swift */,
 			);
 			path = "CallKit-Voip-Example";
 			sourceTree = "<group>";
@@ -1136,6 +1139,7 @@
 				A9B7270F2225905C00D421D1 /* ContactsViewController.swift in Sources */,
 				A9B7270D2225905C00D421D1 /* CallOptionsTableViewController.swift in Sources */,
 				A9B727112225905C00D421D1 /* UserSession.swift in Sources */,
+				A9390E8C2742B34C00D677E6 /* SceneDelegate.swift in Sources */,
 				A9B727102225905C00D421D1 /* UserRepository.swift in Sources */,
 				A9B7246E22255FAB00D421D1 /* AppDelegate.swift in Sources */,
 				A9B727DF2225905C00D421D1 /* LoginViewController.swift in Sources */,
@@ -1290,6 +1294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CallKit-Voip-Example/CallKit-Voip-Example.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "CallKit-Voip-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1310,6 +1315,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "CallKit-Voip-Example/CallKit-Voip-Example.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "CallKit-Voip-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
